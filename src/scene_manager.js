@@ -14,7 +14,8 @@ const sizes = {
     height: window.innerHeight
 }
 export const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
-camera.position.z = 5;
+camera.position.set(0, 5, 5);
+camera.lookAt({ x: 0, y: 0, z: 0 })
 scene.add(camera);
 /**
  * render the scene
@@ -31,11 +32,24 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
-document.body.appendChild(renderer.domElement);
+//document.body.appendChild(renderer.domElement);
 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+
+
+/*    */
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(0, 0);
-var dragable;
+var clickedObject;
+var isDragging = false;
+/*   */
 export function onPointerClick(event) {
 
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -43,30 +57,51 @@ export function onPointerClick(event) {
     raycaster.setFromCamera(pointer, camera);
     const intersect = raycaster.intersectObjects(scene.children, true)
 
-    if (intersect[0] != undefined) {
-        console.log(intersect[0]);
-        dragable = intersect[0].object.parent;
+    for (let i = 0; i < intersect.length; i++) {
+        if (intersect[i].object.type != 'GridHelper') {
+            clickedObject = intersect[i].object.parent;
+            isDragging = true;
+            //console.log(intersect[i].object.type)
+        }
     }
 }
 
 function onPointerMove(event) {
-  
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    if (isDragging && clickedObject) {
+        pointer.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+        pointer.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+    
+        raycaster.setFromCamera(pointer, camera);
+        const intersects = raycaster.intersectObjects([gridHelper]);
+    
+        if (intersects.length > 0) {
+          const intersectionPoint = intersects[0].point;
+          clickedObject.position.x = intersectionPoint.x;
+          clickedObject.position.z = intersectionPoint.z;
+        }
+      }
+ 
 }
-function dragObject() {
-    if (dragable != undefined) {
-        dragable.position.x = pointer.x*2;
-        dragable.position.y = pointer.y*2;
-    }
-}
+// function dragObject() {
+
+//     if (clickedObject != null && isDragging) {
+//         clickedObject.position.x = pointer.x * 2;
+//         clickedObject.position.y = pointer.y * 2;
+//         console.log('dragging');
+//     }
+// }
 export function render() {
-    dragObject();
     renderer.render(scene, camera);
 }
 
+function onMouseUp(event) {
+    isDragging = false;
+    clickedObject = null;
+}
+
 window.addEventListener('mousedown', onPointerClick);
-window.addEventListener('mouseup',()=>{dragable=undefined;})
+window.addEventListener('mouseup', onMouseUp)
 window.addEventListener('mousemove', onPointerMove)
 
 //lighting
@@ -79,24 +114,12 @@ sunLight.shadow.camera.near = 750;
 sunLight.shadow.camera.fov = 30;
 scene.add(sunLight);
 
-/**
-* texture 
-*/
-//skyBox texture
-// const loader = new THREE.CubeTextureLoader();
-// const skybox = loader.load([
-//     'static/texture/skybox/rt.png',
-//     'static/texture/skybox/lf.png',
-//     'static/texture/skybox/up.png',
-//     'static/texture/skybox/dn.png',
-//     'static/texture/skybox/ft.png',
-//     'static/texture/skybox/bk.png',
-// ]);
+
 
 scene.background = new THREE.Color().setRGB(54 / 255, 40 / 255, 93 / 255);
 
-// // Create a grid helper
-// const gridHelper = new THREE.GridHelper(10, 10);
-// scene.add(gridHelper);
-// const light = new THREE.AmbientLight('white'); // soft white light
-// scene.add(light);
+// Create a grid helper
+const gridHelper = new THREE.GridHelper(100, 100);
+scene.add(gridHelper);
+
+
