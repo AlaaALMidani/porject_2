@@ -1,5 +1,5 @@
-import { imageTo3dModel } from "./network/network_helper";
-import { postData } from "./network/network_helper";
+import { imageTo3dModel } from "../network/network_helper";
+import { postData } from "../network/network_helper";
 
 // Get references to the upload button and file input
 const uploadButton = document.getElementById('upload-button');

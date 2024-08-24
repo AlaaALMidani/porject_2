@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import * as ModelManager from './model_manager.js'
-import * as SceneManager from './scene_manager'
-import * as Control from './control.js'
+import * as ModelManager from './logic/model_manager.js'
+import * as SceneManager from './logic/scene_manager.js'
+import * as Control from './logic/control.js'
 
 
 ModelManager.loadModel();
