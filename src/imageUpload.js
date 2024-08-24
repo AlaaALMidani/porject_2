@@ -1,4 +1,4 @@
-import { imageTo3dModel } from "./network/network_helper";
+import { postData } from "./network/network_helper";
 
 // Get references to the upload button and file input
 const uploadButton = document.getElementById('upload-button');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (file) {
             // Call the function to convert the image to a 3D model
             console.log(123);
-            imageTo3dModel("predict", file);
+            postData(file);
         } else {
             alert("Please upload an image first.");
         }
