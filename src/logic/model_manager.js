@@ -4,6 +4,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import * as SceneManager from './scene_manager'
 
 var url = 'static/models/modern chair 11 obj.obj'
+var selectedRoom='static/rooms/modern chair 11 obj.obj'
 var model;
 
 
@@ -14,7 +15,6 @@ export function loadModel() {
 		getObjModel((obj) => {
 			model = obj;
 			SceneManager.scene.add(model);
-
 			obj.scale.set(0.01, 0.01, 0.01);
 		})
 	} else if (fileSuffix == 'gltf') {
@@ -35,10 +35,9 @@ function getGltfModel(callback) {
 	gltfLoader.setDRACOLoader(dracoLoader);
 
 	gltfLoader.load(
-		url,
+		selectedRoom,
 		function (gltf) {
 			console.log('gltf');
-
 			callback(gltf.scene.children[0]);
 		},
 		function (xhr) {

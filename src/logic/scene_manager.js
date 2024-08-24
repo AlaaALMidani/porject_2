@@ -33,7 +33,6 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 document.body.appendChild(renderer.domElement);
-
 // 
 // 
 // 
