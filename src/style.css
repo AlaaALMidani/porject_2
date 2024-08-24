@@ -1,88 +1,172 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200..900&display=swap');
 
+:root {
+    --primary-color: #133e8f;
+    --left-margin: 75px;
+    --header-color: #4f7dd3;
+    --grey-bg-color: rgba(0, 0, 0, 0.027);
+}
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-  
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 
 .header {
     display: flex;
+    position: fixed;
     justify-content: space-between;
     width: 100%;
-    padding: 15px 43px 15px 43px;
-    background-color: rgb(0, 0, 0);
-    align-content: center;
+    padding: 20px 73px 10px 73px;
+    background-color: #133e8fbd;
+    align-items: center;
+    z-index: 100;
 }
 
 .nav-bar a {
-    color: rgba(255, 255, 255, 0.674);
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    margin-left: 16px;
+    margin-left: 30px;
+}
+
+.nav-bar-link {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-bar-link:active {
+    color: var(--primary-color);
+    border-bottom: 2px solid #ccc;
 }
 
 .logo {
-    color: rgb(247, 247, 247);
-    font-size: large;
+    color: rgb(252, 252, 252);
+    font-size: 40px;
     font-weight: 700;
     text-decoration: none;
+    letter-spacing: 6px;
 }
 
 .logo img {
-    width: 40px;
+    width: 70px;
     background: transparent;
 }
 
+
+
 .top-div {
-    display: block;
+    display: flex;
     position: relative;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
-    height: 700px;
-    background-image: url('../static/hello.png');
-    background-repeat: no-repeat;
-    background-size: cover ;
+    padding-top: 150px;
+    height: 800px;
+    background-color: var(--primary-color);
+    flex-wrap: wrap;
+
 }
 
 .top-text {
-    width: 620px;
+    width: 600px;
     color: white;
-    margin-left: 250px;
-    padding-top: 50px;
-   
+    margin-left: 73px;
+    margin-top: 130px;
 }
 
 .big-text {
-    font-size: 34px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 900;
     margin-bottom: 10px;
     color: white;
 }
 
-.very-small-text {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.555);
+.small-text {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.334);
+    font-weight: bold;
+}
+
+.primary-button {
+    color: white;
+    width: 150px;
+    background-color: transparent;
+    border: 2px solid #58b2ed;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+.primary-button:hover {
+    background-color: #58b2ed;
+}
+
+.intro-image img {
+    display: inline-block;
+    height: 600px;
+    animation: spin 3s infinite;
+}
+
+.top-div .primary-button {
+    position: absolute;
+    margin-top: 500px;
+    background-color: #58b2ed;
+    margin-left: var(--left-margin);
+}
+
+.top-div .primary-button:hover {
+    position: absolute;
+    margin-top: 500px;
+    background-color: #2ca1f0;
+    margin-left: var(--left-margin);
+
+}
+
+.secondary-button {
+    position: absolute;
+    margin-top: 500px;
+    background-color: transparent;
+    margin-left: 250px;
+    width: 130 px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 
 
-.search-container {
+.prompt-container {
     display: flex;
-    margin-left: 250px;
     align-items: center;
     margin-top: 20px;
     width: 300px;
 }
 
-.search-container input[type="text"] {
+.prompt-container input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -90,7 +174,7 @@ body {
     outline: none;
 }
 
-.search-container button {
+.prompt-container button {
     padding: 10px;
     border: 1px solid #ccc;
     border-left: none;
@@ -99,7 +183,46 @@ body {
     cursor: pointer;
 }
 
-.search-container button svg {
+.prompt-container button svg {
     width: 12px;
     height: 12px;
+}
+
+.right-column img {
+    max-width: 100%;
+    max-height: 50vh; /* Ensures the image isn't too big or too small */
+    height: auto;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+
+/* .convert-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+} */
+
+.convert-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Optional: border for better visibility */
+    transition: background 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.convert-button:hover {
+    background: rgba(255, 255, 255, 0.3); /* Slightly more opaque on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
 }

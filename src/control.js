@@ -22,3 +22,34 @@ document.addEventListener('keyup', function (event) {
         console.log('n');
     }
 });
+
+
+export function postData(file) {
+    const formData = new FormData();
+    formData.append('name', 'hope');
+    formData.append('image', file);
+    formData.append('category', 'none');
+    formData.append('type', 'object');
+    formData.append('room', 1);
+
+    fetch(baseUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIyNzEzOTIzLCJpYXQiOjE3MjI3MDY3MjMsImp0aSI6IjNlZTA4ZDNkYjAxMDQxMjJhMGIzNDA5MDExODdiZTcxIiwidXNlcl9pZCI6Nn0.pui0_37L5KDPXnOTNxpNGr0Wuyhk8A1JwIBA_vKcnCI"
+        },
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.log(response);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}

@@ -3,7 +3,6 @@ let baseUrl = 'https://503f-169-150-196-137.ngrok-free.app'
 
 getData(url)
 {
-    
 fetch(url, {
 	method: 'GET',
 	mode: 'no-cors',
@@ -35,15 +34,11 @@ fetch(url, {
 	.catch(error => {
 		console.error('There was a problem with the fetch operation:', error);
 	});
-
-
-
 }
 
 
 postData(url)
 {
-    
 fetch(url, {
 	method: 'POST',
 	mode: 'no-cors',
@@ -75,7 +70,4 @@ fetch(url, {
 	.catch(error => {
 		console.error('There was a problem with the fetch operation:', error);
 	});
-
-
-
 }
