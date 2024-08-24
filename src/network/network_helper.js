@@ -1,7 +1,7 @@
 let baseUrl = 'https://503f-169-150-196-137.ngrok-free.app'
 
 
-getData(url)
+export function getData(url)
 {
 fetch(url, {
 	method: 'GET',
@@ -37,7 +37,7 @@ fetch(url, {
 }
 
 
-postData(url)
+export function postData(url)
 {
 fetch(url, {
 	method: 'POST',
