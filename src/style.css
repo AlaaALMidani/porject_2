@@ -91,17 +91,14 @@
     flex-direction: row;
     align-items: center;
     width: 100%;
-    padding-top: 100px;
     height: 100vh;
     background-color: var(--primary-color);
-    flex-wrap: wrap;
-
 }
 
 .top-text {
     width: 600px;
     color: white;
-    margin-left: 73px;
+    margin-left: 75px;
 }
 
 .big-text {
@@ -133,6 +130,7 @@
 }
 
 .intro-image img {
+    padding-top: 50px;
     display: inline-block;
     height: 75vh;
     animation: spin 3s infinite;
@@ -142,7 +140,6 @@
     position: absolute;
     margin-top: 20px;
     background-color: #58b2ed;
-    margin-left: var(--left-margin);
 }
 
 .top-div .primary-button:hover {
@@ -157,7 +154,7 @@
     position: absolute;
     margin-top: 20px;
     background-color: transparent;
-    margin-left: 250px;
+    margin-left: 170px;
     width: 130 px;
     color: white;
     font-size: 20px;
