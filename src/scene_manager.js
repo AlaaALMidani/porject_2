@@ -83,14 +83,13 @@ function onPointerMove(event) {
       }
  
 }
-// function dragObject() {
-
-//     if (clickedObject != null && isDragging) {
-//         clickedObject.position.x = pointer.x * 2;
-//         clickedObject.position.y = pointer.y * 2;
-//         console.log('dragging');
-//     }
-// }
+function dragObject() {
+    if (clickedObject != null && isDragging) {
+        clickedObject.position.x = pointer.x * 2;
+        clickedObject.position.y = pointer.y * 2;
+        console.log('dragging');
+    }
+}
 export function render() {
     renderer.render(scene, camera);
 }
