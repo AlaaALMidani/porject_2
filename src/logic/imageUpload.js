@@ -1,6 +1,5 @@
-import { imageTo3dModel } from "../network/network_helper";
-import { postData } from "../network/network_helper";
-
+import * as Network  from "../network/network_helper.js";
+import * as EndPoints from "../network/end_points.js"
 // Get references to the upload button and file input
 const uploadButton = document.getElementById('upload-button');
 const fileInput = document.getElementById('file-input');
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
-
+       
         if (file) {
             const reader = new FileReader();
 
@@ -34,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for the convert button click
     convertButton.addEventListener('click', () => {
         const file = fileInput.files[0];
+
         if (file) {
             // Call the function to convert the image to a 3D model
-            console.log(123);
-            imageTo3dModel("predict", file);
-            postData(file);
+          console.log(123);
+          console.log( Network.getModelData(EndPoints.GENERATE_OBJECT))
         } else {
             alert("Please upload an image first.");
         }

@@ -3,31 +3,35 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import * as SceneManager from './scene_manager'
 
-var url = 'static/models/modern chair 11 obj.obj'
-var selectedRoom='static/rooms/modern chair 11 obj.obj'
-var model;
+
+export var model;
 
 
 
-export function loadModel() {
+export function loadModel(url) {
 	const fileSuffix = url.split(".").pop();
 	if (fileSuffix == 'obj') {
-		getObjModel((obj) => {
+		getObjModel(url,(obj) => {
 			model = obj;
 			SceneManager.scene.add(model);
 			obj.scale.set(0.01, 0.01, 0.01);
+			obj.position.set(0, 0, 0);
 		})
-	} else if (fileSuffix == 'gltf') {
-		getGltfModel((gltf) => {
+	} else if (fileSuffix == 'gltf' || fileSuffix=='glb') {
+		getGltfModel(url,(gltf) => {
 			model = gltf;
+			model.scale.set(10,10,10,)
+			model.position.set(-10, 0, 0);
 			SceneManager.scene.add(model);
 		})
-	} else {
+	} 
+	
+	else {
 		console.log('The model type is not supported');
 	}
 
 }
-function getGltfModel(callback) {
+function getGltfModel(url, callback) {
 
 	const gltfLoader = new GLTFLoader();
 	const dracoLoader = new DRACOLoader();
@@ -35,10 +39,10 @@ function getGltfModel(callback) {
 	gltfLoader.setDRACOLoader(dracoLoader);
 
 	gltfLoader.load(
-		selectedRoom,
+		url,
 		function (gltf) {
 			console.log('gltf');
-			callback(gltf.scene.children[0]);
+			callback(gltf.scene);
 		},
 		function (xhr) {
 			console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -48,7 +52,7 @@ function getGltfModel(callback) {
 		}
 	);
 }
-function getObjModel(callback) {
+function getObjModel(url ,callback ) {
 	const loader = new OBJLoader();
 	loader.load(
 		url,

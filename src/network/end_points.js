@@ -1,1 +1,1 @@
-const predict = 'predict';
+export const GENERATE_OBJECT = 'objects/79';

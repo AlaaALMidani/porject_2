@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as ModelManager from './model_manager'
 import * as dat from 'dat.gui'
 // debug 
 //export const gui = new dat.GUI()
@@ -35,15 +36,7 @@ window.addEventListener('resize', () => {
 document.body.appendChild(renderer.domElement);
 // 
 // 
-// 
-// 
-// 
-// 
-// 
-// 
 
-
-/*    */
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(0, 0);
 var clickedObject;
@@ -55,12 +48,13 @@ export function onPointerClick(event) {
     pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
     const intersect = raycaster.intersectObjects(scene.children, true)
-
+    
     for (let i = 0; i < intersect.length; i++) {
-        if (intersect[i].object.type != 'GridHelper') {
+
+        if (intersect[i].object.type != 'GridHelper'&&intersect[i] == ModelManager.model) {
             clickedObject = intersect[i].object.parent;
             isDragging = true;
-            //console.log(intersect[i].object.type)
+            console.log(intersect[i])
         }
     }
 }
@@ -73,8 +67,9 @@ function onPointerMove(event) {
     
         raycaster.setFromCamera(pointer, camera);
         const intersects = raycaster.intersectObjects([gridHelper]);
-    
+        
         if (intersects.length > 0) {
+          
           const intersectionPoint = intersects[0].point;
           clickedObject.position.x = intersectionPoint.x;
           clickedObject.position.z = intersectionPoint.z;
